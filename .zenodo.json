@@ -1,6 +1,6 @@
 {
   "upload_type": "software", 
-  "description": "This software allows population projections of North Atlantic right whales using an individual based model informed by demographic parameter estimates.",
+  "description": "This software allows population projections of North Atlantic right whales.",
   "title": "NARW Population Viability Analysis",
   "creators": [
      {
