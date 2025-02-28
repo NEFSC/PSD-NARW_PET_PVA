@@ -1,4 +1,5 @@
 # A Management-focused Population Viability Analysis (PVA) for North Atlantic Right Whales
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14945489.svg)](https://doi.org/10.5281/zenodo.14945489)
 
 This repository contains the data and scripts developed by the Population Evaluation Team (PET) subgroup [^readme-1] to assess the effect of potential management measures on the future population trajectory of North Atlantic right whales. The PET PVA consists of a core stage-structured model and several submodels (mortality, reproduction, entanglement, vessel strike, prey availability, and prey accessibility). The primary scripts are as follows:
 
