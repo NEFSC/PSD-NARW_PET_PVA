@@ -24,4 +24,9 @@ The inputs folder contains various objects representing both data and posterior 
 
 Conditional on the coded structure of the population and the specified collection of parameters defining demographic attributes, simulated populations are projected through time (e.g., 100 years) to examine distributions of future population sizes and probabilities of extinction (or quasi-extinction). These outputs can be used to examine anticipated outcomes of management measures that are aimed at reducing threats to the population.
 
+## References
+
+Runge MC, Linden DW, Hostetler JA, Borggaard DL, Garrison LP, Knowlton AR, Lesage V, Williams R, Pace III RM. 2023. A management-focused population viability analysis for North Atlantic right whales. US Dept Commer Northeast Fish Sci Cent Tech Memo 307. 93 p. https://doi.org/10.25923/dqp2-2r71
+
+### Disclaimer
 *This repository is a scientific product and is not official communication of the National Oceanic and Atmospheric Administration, or the United States Department of Commerce. All NOAA GitHub project code is provided on an 'as is' basis and the user assumes responsibility for its use. Any claims against the Department of Commerce or Department of Commerce bureaus stemming from the use of this GitHub project will be governed by all applicable Federal law. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by the Department of Commerce. The Department of Commerce seal and logo, or the seal and logo of a DOC bureau, shall not be used in any manner to imply endorsement of any commercial product or activity by DOC or the United States Government.*
