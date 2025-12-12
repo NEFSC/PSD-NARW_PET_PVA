@@ -1,4 +1,5 @@
 # A Management-focused Population Viability Analysis (PVA) for North Atlantic Right Whales
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14945489.svg)](https://doi.org/10.5281/zenodo.14945489)
 
 This repository contains the data and scripts developed by the Population Evaluation Team (PET) subgroup [^readme-1] to assess the effect of potential management measures on the future population trajectory of North Atlantic right whales. The PET PVA consists of a core stage-structured model and several submodels (mortality, reproduction, entanglement, vessel strike, prey availability, and prey accessibility). The primary scripts are as follows:
@@ -26,7 +27,10 @@ Conditional on the coded structure of the population and the specified collectio
 
 ## References
 
-Runge MC, Linden DW, Hostetler JA, Borggaard DL, Garrison LP, Knowlton AR, Lesage V, Williams R, Pace III RM. 2023. A management-focused population viability analysis for North Atlantic right whales. US Dept Commer Northeast Fish Sci Cent Tech Memo 307. 93 p. https://doi.org/10.25923/dqp2-2r71
+Linden DW, Runge MC, Hostetler JA, Borggaard DL, Garrison LP, Knowlton AR, Lesage V, Williams R, Pace III RM. 2025. Update to a management-focused population viability analysis for North Atlantic right whales. US Dept Commer Northeast Fish Sci Cent Tech Memo 337. 29 p. <https://doi.org/10.25923/0xdp-8s42>
+
+Runge MC, Linden DW, Hostetler JA, Borggaard DL, Garrison LP, Knowlton AR, Lesage V, Williams R, Pace III RM. 2023. A management-focused population viability analysis for North Atlantic right whales. US Dept Commer Northeast Fish Sci Cent Tech Memo 307. 93 p. <https://doi.org/10.25923/dqp2-2r71>
 
 ### Disclaimer
+
 *This repository is a scientific product and is not official communication of the National Oceanic and Atmospheric Administration, or the United States Department of Commerce. All NOAA GitHub project code is provided on an 'as is' basis and the user assumes responsibility for its use. Any claims against the Department of Commerce or Department of Commerce bureaus stemming from the use of this GitHub project will be governed by all applicable Federal law. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by the Department of Commerce. The Department of Commerce seal and logo, or the seal and logo of a DOC bureau, shall not be used in any manner to imply endorsement of any commercial product or activity by DOC or the United States Government.*

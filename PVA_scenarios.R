@@ -33,7 +33,7 @@ build.scenario.prey <- function(
     year = preyDat$year,
     missing = preyDat$missing,
     preyDat %>% select(-year,-missing) %>%
-      rollapply(3,function(x){mean(x,na.rm=T)},partial=T,align="right")) %>% 
+      rollapply(3,function(x){log(mean(exp(x),na.rm=T))},partial=T,align="right")) %>% 
     filter(year %in% 1990:2019)
   foodMean <- apply(preyDat_roll[,c("food1","food2")],2,mean)
   foodStdv <- apply(preyDat_roll[,c("food1","food2")],2,sd)
@@ -72,7 +72,7 @@ build.scenario.prey <- function(
   preyArray <- abind(preyArrayList,along=1) + log(preyChange)
   
   # calculate the rolling 3-yr average (previous 3 years, hence "right")
-  preyArray_roll <- apply(preyArray, c(2,3), rollmean, k = 3, align = "right")
+  preyArray_roll <- log(apply(exp(preyArray), c(2,3), rollmean, k = 3, align = "right"))
 
   # standardize by the values used in the model estimation
   preyArray_roll <- sweep(preyArray_roll, 3, c(foodMean[1], foodMean[2]), "-")
@@ -86,7 +86,7 @@ build.scenario.prey <- function(
 # function for building wound scenarios
 build.scenario.wound <- function(
   iTheta,  #posterior mortality rates from model estimation
-  eps.i,
+  eps.i,   #random effects
   proj_yrs = list(1:100), # the projected years for which change lists apply
   iE.change = list(c(1,1,1,1,1)), # change in state-specific entanglement injury rate
   iV.change = list(c(1,1,1,1,1)), # change in state-specific vessel-strike injury rate

@@ -71,13 +71,13 @@ updateWound.whale <- function(obj, woundProb) {
 }
 
 # Updates stage for this whale and this year
-updateStage.whale <- function(obj, beta, eps.r, prey, N, kappa, B.ref.yr = 2019) {
+updateStage.whale <- function(obj, beta, eps.r, #regime_t, 
+                              prey, N, kappa, B.ref.yr = 2019) {
+  # for hard coding the regime (vs. simulating it)
+  regime_t <- as.numeric(B.ref.yr > 2010)
   B <- plogis(beta[1:nReproStages] + 
                 beta["b.prey1"] * prey[1] + beta["b.prey2"] * prey[2] + 
-                as.numeric(beta["b.regime2"]) * as.numeric(B.ref.yr >= 2013) %*%
-                   matrix(c(1,1,1,1,1,1,0),ncol = nReproStages,nrow = 1) +
-                #beta["b.ent"] * (entangled.whale(obj)) + 
-                #beta["b.ves"] * (struck.whale(obj)) +
+                beta["b.regime"] * regime_t + beta["b.regime.prey2"] * regime_t * prey[2] +
                 beta["b.inj"] * (entangled.whale(obj)) + 
                 beta["b.inj"] * (struck.whale(obj)) +
                 eps.r)
@@ -87,8 +87,8 @@ updateStage.whale <- function(obj, beta, eps.r, prey, N, kappa, B.ref.yr = 2019)
 }
 
 # Transition whale's state from time t to t+1
-update.whale <- function(obj, alpha, eps.m, beta, eps.r, prey, N, kappa, 
-                         woundProb, B.ref.yr = 2019) {
+update.whale <- function(obj, alpha, eps.m, beta, eps.r, 
+                         prey, N, kappa, woundProb, B.ref.yr = 2019) {
   # If whale is already dead, don't change its state
   if (!alive.whale(obj))
     return(obj)
@@ -100,7 +100,8 @@ update.whale <- function(obj, alpha, eps.m, beta, eps.r, prey, N, kappa,
   # If whale is now dead, don't change its state further
   if (!alive.whale(out))
     return(out)
-  out$stage <- factor(updateStage.whale(obj, beta, eps.r, prey, N, kappa, B.ref.yr),
+  out$stage <- factor(updateStage.whale(obj, beta, eps.r, 
+                                        prey, N, kappa, B.ref.yr),
                       levels = stages) 
   return(out)
 }
@@ -287,22 +288,25 @@ woundProbMatrix <- function(iTheta, # injury parameters from COD model
                             # reference time period from the retrospective estimates
                             # only relevant for pre/post regime years (2010 or 2013)
                             i.ref.yr = 2019) {
-  regime1 <- as.numeric(i.ref.yr > 2010)
-  regime2 <- as.numeric(i.ref.yr > 2013)
+  regime_t <- as.numeric(i.ref.yr > 2013)
   
   mat <- matrix(0, nWoundStates, nWoundStates, 
                 dimnames = list(woundStates, woundStates))
   
   iV <- exp(log(iTheta[,"Mu.iV"]) + iTheta[,"a.iV.age"]*(age-5) + iTheta[,"a.iV.calf"]*w.calf +
               iTheta[,"a.iV.rest"]*resting +
-              iTheta[,"a.iV.regime2"]*regime2 + eps.i[["V"]]) * reduce.iV
+              iTheta[,"a.iV.regime2"]*regime_t + eps.i[["V"]]) * reduce.iV
   
   iE <- exp(log(iTheta[,"Mu.iE"]) + iTheta[,"a.iE.age"]*(age-5) + iTheta[,"a.iE.calf"]*w.calf +
               iTheta[,"a.iE.rest"]*resting +
-              iTheta[,"a.iE.regime2"]*regime2 + eps.i[["E"]]) * reduce.iE
+              iTheta[,"a.iE.regime2"]*regime_t + eps.i[["E"]]) * reduce.iE
   
   pinj <- 1-exp(-(iV + iE))
-  pinj_E <- iE / (iV + iE)
+  if (iE >0){
+    pinj_E <- iE / (iV + iE)
+  } else {
+    pinj_E <- 0
+  }
   
   # col = t, row = t+1
   mat[1, 1] <- 1 - pinj

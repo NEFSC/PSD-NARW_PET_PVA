@@ -18,7 +18,7 @@ out_drive <- "C:\\temp\\"
 #------------------------------------------------------------------------------#
 # Basic settings----
 #------------------------------------------------------------------------------#
-version <- "1.00"
+version <- "1.2"
 
 nBoot <- 1000#, number of bootstrap runs
 nRep  <- 1   #, number of replications (Monte Carlo loop). 
@@ -77,7 +77,7 @@ nThresholds <- length(thresholds)
 
 ceiling_N <- 10000 # Just in case
 verbose <- 2 #integer 0 to 5
-seed <- 2023 #opportunity to replicate random sampling
+seed <- 2024 #opportunity to replicate random sampling
 set.seed(seed)
 
 #------------------------------------------------------------------------------#
@@ -121,11 +121,12 @@ post_repro$beta.ageW <- qlogis(post_repro$p.beta.ageW)
 post_repro[, grep("beta.age.first",colnames(post_repro),value=TRUE)] <-
   post_repro[, grep("beta.age.first",colnames(post_repro),value=TRUE)] + post_repro[,"beta.ageW"]
 betas <- post_repro[, c(grep("beta.age.first",colnames(post_repro),value=TRUE),
-                        "beta.regime2", "beta.regime2W", 
+                        "beta.regime", "beta.regime.p2", 
                         "beta.p1", "beta.p2", 
                         "beta.inj"
                         )]
-colnames(betas) <- c(5:10, "W", "b.regime2", "b.regime2W",
+colnames(betas) <- c(5:10, "W", 
+                     "b.regime","b.regime.prey2",
                      "b.prey1", "b.prey2", "b.inj") 
 
 ## calf loss parameter----
@@ -242,7 +243,7 @@ for (e in weak.e){
   )
 }
 
-# all vessel scenarios
+# all vessel scenarios (regarding speed restrictions/temporal change)
 ent.reduce <- c(0,25)
 vess_t_change <- c(0.7,0,-0.3)
 vess_speed <- c(1,0.75,0)
